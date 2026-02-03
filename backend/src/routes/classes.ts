@@ -31,7 +31,7 @@ classesRouter.get('/', authenticate, checkPermission('classes', 'read'), async (
       classes.map(async (c) => {
         const studentCount = await Student.countDocuments({ classId: c._id, status: 'active', ...schoolFilter });
         const classObj = c.toObject();
-        const teacher = classObj.teacherId as { firstName: string; lastName: string } | null;
+        const teacher = classObj.teacherId as unknown as { firstName: string; lastName: string } | null;
         return {
           ...classObj,
           id: c._id,
@@ -64,7 +64,7 @@ classesRouter.get('/:id', authenticate, checkPermission('classes', 'read'), asyn
 
     const students = await Student.find({ classId: classInfo._id, ...schoolFilter });
     const classObj = classInfo.toObject();
-    const teacher = classObj.teacherId as { firstName: string; lastName: string; email: string } | null;
+    const teacher = classObj.teacherId as unknown as { firstName: string; lastName: string; email: string } | null;
 
     res.json({
       status: 'success',

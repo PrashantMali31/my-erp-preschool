@@ -36,7 +36,7 @@ const schoolSchema = new Schema<ISchool>(
     subscriptionPlan: { 
       type: String, 
       enum: ['free', 'basic', 'premium', 'enterprise'], 
-      default: 'trial' 
+      default: 'free' 
     },
     status: { 
       type: String, 

@@ -38,8 +38,8 @@ attendanceRouter.get('/', authenticate, checkPermission('attendance', 'read'), a
 
     const attendanceFormatted = attendance.map((a) => {
       const att = a.toObject();
-      const student = att.studentId as { firstName: string; lastName: string } | null;
-      const classInfo = att.classId as { name: string; section: string } | null;
+      const student = att.studentId as unknown as { firstName: string; lastName: string } | null;
+      const classInfo = att.classId as unknown as { name: string; section: string } | null;
       return {
         ...att,
         id: a._id,
@@ -244,8 +244,8 @@ attendanceRouter.put('/:id', authenticate, authorize('admin', 'teacher'), checkP
     await attendance.save();
 
     const att = attendance.toObject();
-    const student = att.studentId as { firstName: string; lastName: string } | null;
-    const classInfo = att.classId as { name: string; section: string } | null;
+    const student = att.studentId as unknown as { firstName: string; lastName: string } | null;
+    const classInfo = att.classId as unknown as { name: string; section: string } | null;
 
     res.json({
       status: 'success',

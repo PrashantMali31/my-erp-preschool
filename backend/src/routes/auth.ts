@@ -86,7 +86,7 @@ authRouter.post('/school/signup', validate(schoolSignupSchema), async (req, res,
           schoolId: school._id.toString(),
         },
         env.JWT_SECRET,
-        { expiresIn: env.JWT_EXPIRES_IN }
+        { expiresIn: env.JWT_EXPIRES_IN as string }
       );
 
     res.status(201).json({
@@ -163,7 +163,7 @@ authRouter.post('/login', validate(loginSchema), async (req, res, next) => {
           schoolId: school._id.toString(),
         },
         env.JWT_SECRET,
-        { expiresIn: env.JWT_EXPIRES_IN }
+        { expiresIn: env.JWT_EXPIRES_IN as string }
       );
 
     res.json({

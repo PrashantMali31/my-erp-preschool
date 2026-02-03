@@ -88,7 +88,7 @@ dashboardRouter.get('/classes', authenticate, checkPermission('dashboard', 'read
       classes.map(async (c) => {
         const studentCount = await Student.countDocuments({ classId: c._id, status: 'active', ...schoolFilter });
         const classObj = c.toObject();
-        const teacher = classObj.teacherId as { firstName: string; lastName: string } | null;
+        const teacher = classObj.teacherId as unknown as { firstName: string; lastName: string } | null;
         return {
           id: c._id,
           name: `${c.name} ${c.section}`,

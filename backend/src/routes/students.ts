@@ -37,7 +37,7 @@ studentsRouter.get('/', authenticate, checkPermission('students', 'read'), async
 
     const studentsWithClass = students.map((s) => {
       const student = s.toObject();
-      const classInfo = student.classId as { name: string; section: string } | null;
+      const classInfo = student.classId as unknown as { name: string; section: string } | null;
       return {
         ...student,
         id: student._id,

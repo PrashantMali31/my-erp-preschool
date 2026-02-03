@@ -29,8 +29,8 @@ feesRouter.get('/', authenticate, checkPermission('fees', 'read'), async (req: A
 
     const feesFormatted = fees.map((f) => {
       const fee = f.toObject();
-      const student = fee.studentId as { firstName: string; lastName: string } | null;
-      const classInfo = fee.classId as { name: string; section: string } | null;
+const student = fee.studentId as unknown as { firstName: string; lastName: string } | null;
+        const classInfo = fee.classId as unknown as { name: string; section: string } | null;
       return {
         ...fee,
         id: f._id,
@@ -89,23 +89,24 @@ feesRouter.get('/:id', authenticate, checkPermission('fees', 'read'), async (req
       return next(createError('Fee record not found', 404));
     }
 
-    const feeObj = fee.toObject();
-    const student = feeObj.studentId as { firstName: string; lastName: string } | null;
-    const classInfo = feeObj.classId as { name: string; section: string } | null;
+const feeObj = fee.toObject();
+      const student = feeObj.studentId as unknown as { firstName: string; lastName: string } | null;
+      const classInfo = feeObj.classId as unknown as { name: string; section: string } | null;
 
-    res.json({
-      status: 'success',
-      data: {
-        fee: {
-          ...feeObj,
-          id: fee._id,
-          studentName: student ? `${student.firstName} ${student.lastName}` : 'Unknown',
-          className: classInfo ? `${classInfo.name} ${classInfo.section}` : 'Unknown',
+      res.json({
+        status: 'success',
+        data: {
+          fee: {
+            ...feeObj,
+            id: fee._id,
+            studentName: student ? `${student.firstName} ${student.lastName}` : 'Unknown',
+            className: classInfo ? `${classInfo.name} ${classInfo.section}` : 'Unknown',
+          },
         },
-      },
-    });
-  } catch (error) {
-    next(error);
+      });
+    } catch (error) {
+      next(error);
+    }
   }
 });
 
@@ -174,9 +175,9 @@ feesRouter.put('/:id', authenticate, authorize('admin'), checkPermission('fees',
       .populate('studentId', 'firstName lastName')
       .populate('classId', 'name section');
 
-    const feeObj = updatedFee!.toObject();
-    const student = feeObj.studentId as { firstName: string; lastName: string } | null;
-    const classInfo = feeObj.classId as { name: string; section: string } | null;
+const feeObj = updatedFee!.toObject();
+      const student = feeObj.studentId as unknown as { firstName: string; lastName: string } | null;
+      const classInfo = feeObj.classId as unknown as { name: string; section: string } | null;
 
     res.json({
       status: 'success',
@@ -216,13 +217,13 @@ feesRouter.post('/:id/pay', authenticate, authorize('admin'), checkPermission('f
     fee.paymentMethod = paymentMethod || 'cash';
     fee.transactionId = transactionId;
 
-    await fee.save();
+await fee.save();
 
-    const feeObj = fee.toObject();
-    const student = feeObj.studentId as { firstName: string; lastName: string } | null;
-    const classInfo = feeObj.classId as { name: string; section: string } | null;
+      const feeObj = fee.toObject();
+      const student = feeObj.studentId as unknown as { firstName: string; lastName: string } | null;
+      const classInfo = feeObj.classId as unknown as { name: string; section: string } | null;
 
-    res.json({
+      res.json({
       status: 'success',
       data: {
         fee: {

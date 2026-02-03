@@ -4,28 +4,27 @@
   "private": true,
   "description": "Pre-School ERP System with Frontend and Backend",
   "scripts": {
-    "dev": "concurrently \"bun run dev:frontend\" \"bun run dev:backend\"",
-    "dev:frontend": "cd frontend && bun run dev",
-    "dev:backend": "cd backend && bun run dev",
-    "install:all": "bun install && cd frontend && bun install && cd ../backend && bun install",
-    "build": "bun run build:backend && bun run build:frontend",
-    "build:frontend": "cd frontend && bun run build",
-    "build:backend": "cd backend && bun run build",
-    "start": "concurrently \"bun run start:frontend\" \"bun run start:backend\"",
-    "start:backend": "cd backend && bun start",
-    "start:frontend": "cd frontend && bun start",
-    "lint": "bun run lint:frontend && bun run lint:backend",
-    "lint:frontend": "cd frontend && bun run lint",
-    "lint:backend": "cd backend && bun run lint",
-    "seed": "cd backend && bun run seed",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "build:backend": "cd backend && npm install && npm run build",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm start",
+    "lint": "npm run lint:frontend && npm run lint:backend",
+    "lint:frontend": "cd frontend && npm run lint",
+    "lint:backend": "cd backend && npm run lint",
+    "seed": "cd backend && npm run seed",
     "clean": "rm -rf frontend/.next frontend/node_modules backend/dist backend/node_modules node_modules",
-    "typecheck": "cd frontend && bun run typecheck && cd ../backend && tsc --noEmit"
+    "typecheck": "cd frontend && npm run typecheck && cd ../backend && npx tsc --noEmit"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "bun": ">=1.0.0"
+    "node": ">=18.0.0"
   }
 }
